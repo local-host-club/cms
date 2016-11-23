@@ -1,0 +1,13 @@
+defusedxml==0.4.1
+Django==1.10.3
+django-allauth==0.29.0
+django-braces==1.10.0
+django-simple-menu==1.2.1
+django-widget-tweaks==1.4.1
+easy-thumbnails==2.3
+oauthlib==2.0.0
+Pillow==3.4.2
+pkg-resources==0.0.0
+python3-openid==3.0.10
+requests==2.12.1
+requests-oauthlib==0.7.0

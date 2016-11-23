@@ -1,0 +1,15 @@
+{% extends "base/base.html" %}
+
+{% block content %}
+<div class="container">
+	<div class="row">
+		<div class="col-md-12">
+			<form method="post" action="{{action}}">
+				{% csrf_token %}
+				{{ form.as_p }}
+				<input type="submit" name="submit" value="Iniciar sesión">
+			</form>
+		</div>
+	</div>
+</div>
+{% endblock content %}

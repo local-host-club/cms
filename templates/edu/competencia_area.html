@@ -1,0 +1,38 @@
+{% extends "base/base.html" %}
+
+{% block page_title %}
+Área de competencia
+{% endblock page_title %}
+
+{% block content %}
+<div class="container">
+	<div class="row">
+		<div class="col-md-12">
+			<h1>{{competenciaarea}}</h1>
+			<h3>Competencias</h3>
+			<ol>
+				{% for competencia in competenciaarea.competencia.all %}
+				<li>
+					{{ competencia }}
+					<ol>
+						{% for nivel in competencia.nivel.all %}
+						<li>{{ nivel.nombre }} - {{ nivel.porcentaje }}%
+							<ol>
+								{% for indicador in nivel.indicador.all %}
+								<li>
+								{{ indicador.descripcion }} <br>
+								({{ indicador.get_porcentaje|floatformat:2 }} del nivel) /
+								({{ indicador.get_porcentaje_total|floatformat:2 }} del total)
+								</li>
+								{% endfor %}
+							</ol>
+						</li>
+						{% endfor %}
+					</ol>
+				</li>
+				{% endfor %}
+			</ol>
+		</div>
+	</div>
+</div>
+{% endblock content %}

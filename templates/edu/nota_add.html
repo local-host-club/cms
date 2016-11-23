@@ -1,0 +1,22 @@
+{% extends "base/base.html" %}
+
+{% block page_title %}
+	Área de competencia
+{% endblock page_title %}
+
+{% block content %}
+<div class="container">
+	<div class="row">
+		<div class="col-md-12">
+			<form method="post" action="{{action}}">
+			<table class="table">
+				{% csrf_token %}
+				{{ nota_form.as_table }}
+				{{ nota_form.management_form}}
+				<input type="submit" name="indicador-submit" value="Guardar">
+				</table>
+			</form>
+		</div>
+	</div>
+</div>
+{% endblock content %}
