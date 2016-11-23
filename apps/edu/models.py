@@ -89,6 +89,12 @@ class Nota(models.Model):
         cuenta = Nota.objects.filter(indicador=self.indicador).count()
         return 1 / cuenta * self.numero
 
+    def get_nota_indicador(self):
+        return self.get_nota() * self.indicador.get_porcentaje()
+
+    def get_nota_total(self):
+        return self.get_nota() * self.indicador.get_porcentaje_total()
+
 
 class Evaluacion(models.Model):
     descripcion = models.TextField("descripción")
