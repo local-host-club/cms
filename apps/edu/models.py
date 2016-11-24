@@ -58,7 +58,7 @@ class Indicador(models.Model):
         verbose_name_plural = "Indicadores"
 
     def __str__(self):
-        return str(self.nivel.competencia) + " > " + str(self.nivel) + " > " + self.descripcion
+        return self.descripcion
 
     def get_porcentaje(self):
         cuenta = Indicador.objects.filter(nivel=self.nivel).count()
@@ -71,7 +71,7 @@ class Indicador(models.Model):
 
 class Nota(models.Model):
     numero = models.PositiveIntegerField("número", default=1)
-    descripcion = models.CharField("descripcion", max_length=20, null=True, blank=True)
+    descripcion = models.CharField("descripcion", max_length=100, null=True, blank=True)
     indicador = models.ForeignKey(Indicador, related_name='nota')
 
     class Meta:
@@ -97,7 +97,10 @@ class Nota(models.Model):
 
 
 class Evaluacion(models.Model):
-    descripcion = models.TextField("descripción")
+    nombre = models.CharField(max_length=140)
+    estrategia = models.TextField()
+    fecha_creacion = models.DateTimeField(auto_now_add=True)
+    creador_por = models.ForeignKey(User)
 
     indicador = models.ManyToManyField(Indicador, blank=True, through='EvaluacionIndicador')
 
@@ -106,12 +109,12 @@ class Evaluacion(models.Model):
         verbose_name_plural = "Evaluaciones"
 
     def __str__(self):
-        return self.descripcion
+        return self.nombre
 
 
 class EvaluacionIndicador(models.Model):
-    evaluacion = models.ForeignKey(Evaluacion)
-    indicador = models.ForeignKey(Indicador)
+    evaluacion = models.ForeignKey(Evaluacion, related_name='indicadores')
+    indicador = models.ForeignKey(Indicador, related_name='evaluaciones')
 
     class Meta:
         verbose_name = "Indicador por evaluación"

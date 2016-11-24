@@ -9,4 +9,5 @@ urlpatterns = [
     url(r'^competencia/add$', views.CompetenciaCreateView.as_view(), name='competencia_add'),
     url(r'^indicador/add$', views.IndicadorCreateView.as_view(), name='indicador_add'),
     url(r'^nivel/add$', views.NivelCreateView.as_view(), name='nivel_add'),
-    url(r'^nota/(?P<pk>\d+)/add$', views.NotaCreateView.as_view(), name='nota_add'), ]
+    url(r'^nota/(?P<pk>\d+)/add$', views.NotaCreateView.as_view(), name='nota_add'),
+    url(r'^evaluacion/add$', views.EvaluacionCreateView.as_view(), name='evaluacion_add'), ]

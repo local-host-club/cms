@@ -40,5 +40,17 @@ class NotaForm(forms.ModelForm):
         fields = ('descripcion',)
 
 
+class EvaluacionForm(forms.ModelForm):
+    class Meta:
+        model = Evaluacion
+        fields = ['nombre', 'estrategia', 'indicador']
+        labels = {
+            'indicador': 'Indicadores de logro'}
+        widgets = {
+            'nombre': forms.TextInput(attrs={'class': 'form-control'}),
+            'estrategia': forms.Textarea(attrs={'class': 'form-control'}),
+            'indicador': forms.CheckboxSelectMultiple()}
+
+
 NotaFormSet = modelformset_factory(Nota, extra=1, fields=['descripcion'])
-NotaFormSet2 = formset_factory(NotaForm, extra=3)
+NotaFormSet2 = formset_factory(NotaForm, extra=8)

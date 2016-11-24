@@ -4,46 +4,81 @@
 Área de competencia
 {% endblock page_title %}
 
+{% block page_header %}
+<div class="page-header">
+	<div class="container">
+		<div class="row">
+			<div class="col-md-12">
+				<h2 class="entry-title">Área de competencia - {{competenciaarea}}</h2>
+			</div>
+		</div>
+	</div>
+</div>
+{% endblock page_header %}
+
 {% block content %}
-<div class="container">
+<div class="container-fluid">
 	<div class="row">
 		<div class="col-md-12">
-			<h1>{{competenciaarea}}</h1>
 			<h3>Competencias</h3>
-			<ol>
-				{% for competencia in competenciaarea.competencia.all %}
-				<li>
-					{{ competencia }}
-					<ol>
-						{% for nivel in competencia.nivel.all %}
-						<li>{{ nivel.nombre }} - {{ nivel.porcentaje }}%
-							<ol>
-								{% for indicador in nivel.indicador.all %}
-								<li>
-								{{ indicador.descripcion }} <br>
-								({{ indicador.get_porcentaje|floatformat:2 }} del nivel) /
-								({{ indicador.get_porcentaje_total|floatformat:2 }} del total)
+			{% for competencia in competenciaarea.competencia.all %}
+			<article>
+				<h3 class="blog-title">Competencia en {{ competencia }}</h3>
+				{% for nivel in competencia.nivel.all %}
+				<div class="entry-more" role="tab" id="nivel-head-{{nivel.id}}">
+					<a href="#nivel-{{nivel.id}}" class="btn btn-system" role="button" data-toggle="collapse" aria-expanded="true" aria-controls="nivel-{{nivel.id}}">
+						Nivel {{nivel.nombre}} - {{nivel.porcentaje}} % <i class="ico-arrow-right"></i>
+					</a> 
+				</div>
+				<div class="post-content collapse" role="tabpanel" id="nivel-{{nivel.id}}" aria-labelledby="nivel-head-{{nivel.id}}" aria-expanded="true">
+					<div class="progress-group">
+						<span class="progress-text">Porcentaje de la competencia</span>
+						<span class="progress-number"><b>{{nivel.porcentaje}}</b>%</span>
+						<div class="progress sm">
+							<div class="progress-bar progress-bar-aqua" style="width: {{nivel.porcentaje}}%"></div>
+						</div>
+					</div>
+					<h2 class="title1">Indicadores</h2>
+					{% for indicador in nivel.indicador.all %}
+					<div class="row">
+						<div class="col-md-2 col-xs-1" role="tab" id="indicador-head-{{indicador.id}}">
+							<a href="#indicador-{{indicador.id}}" class="social-share-btn" role="button" data-toggle="collapse" aria-expanded="true" aria-controls="indicador-{{indicador.id}}">{{forloop.counter}}</a> 
+						</div>
+						<div class="col-md-10 col-xs-11 collapse in" role="tabpanel" id="indicador-{{indicador.id}}" aria-labelledby="indicador-head-{{indicador.id}}" aria-expanded="true">
+							<blockquote class="capton">
+								<p>{{ indicador.descripcion }}</p>
+								<footer>
+									({{ indicador.get_porcentaje|floatformat:2 }} del nivel) /
+									({{ indicador.get_porcentaje_total|floatformat:2 }} del total)
+								</footer>
+							</blockquote>
+							<div class="table-responsive">
 								<table class="table table-bordered">
+									<thead>
+										<tr>
+											<th>Respuesta</th>
+											<th>% del indicador</th>
+											<th>% del nivel</th>
+											<th>% de la competencia</th>
+										</tr>
+									</thead>
+									{% for nota in indicador.nota.all %}
 									<tr>
-										{% for nota in indicador.nota.all %}
-											<td>
-											{{nota.descripcion}}
-											({{nota.get_nota|floatformat:2}})
-											({{nota.get_nota_indicador|floatformat:2}})
-											({{nota.get_nota_total|floatformat:2}})
-											</td>
-										{% endfor %}
+										<td>{{nota.descripcion}}</td>
+										<td>{{nota.get_nota|floatformat:2}}</td>
+										<td>{{nota.get_nota_indicador|floatformat:2}}</td>
+										<td>{{nota.get_nota_total|floatformat:2}}</td>
 									</tr>
+									{% endfor %}
 								</table>
-								</li>
-								{% endfor %}
-							</ol>
-						</li>
-						{% endfor %}
-					</ol>
-				</li>
+							</div>
+						</div> 
+					</div>
+					{% endfor %}
+				</div> 
 				{% endfor %}
-			</ol>
+			</article>
+			{% endfor %}
 		</div>
 	</div>
 </div>

@@ -1,5 +1,6 @@
-from django.views.generic import DetailView, TemplateView
-from django.views.generic.edit import CreateView, UpdateView
+from django.views.generic import DetailView
+from django.views.generic.edit import CreateView
+from braces.views import LoginRequiredMixin
 from apps.edu.models import *
 from apps.edu.forms import *
 
@@ -49,3 +50,13 @@ class NotaCreateView(DetailView):
     def get(self, request, *args, **kwargs):
         nota_form = NotaFormSet2()
         return self.render_to_response({'nota_form': nota_form})
+
+
+class EvaluacionCreateView(LoginRequiredMixin, CreateView):
+    model = Evaluacion
+    form_class = EvaluacionForm
+    template_name = 'edu/evaluacion_add.html'
+
+    def form_valid(self, form):
+        form.instance.creador_por = self.request.user
+        return super(EvaluacionCreateView, self).form_valid(form)

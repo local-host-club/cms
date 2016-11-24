@@ -1,0 +1,28 @@
+{% extends "base/base.html" %}
+
+{% block page_title %}
+Nivel de competencia
+{% endblock page_title %}
+
+{% block content %}
+<div class="container-fluid">
+	<div class="row">
+		<div class="col-md-12">
+			<article>
+				<h3 class="blog-title">Nueva evaluación</h3>
+				<form method="post" action="{{action}}" class="form">
+					<table class="table">
+						{% csrf_token %}
+						{{ form.as_p }}
+						<tr>
+							<td>
+								<input type="submit" name="indicador-submit" class="btn" value="Guardar">
+							</td>
+						</tr>
+					</table>
+				</form>
+			</article>
+		</div>
+	</div>
+</div>
+{% endblock content %}
