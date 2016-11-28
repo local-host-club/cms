@@ -1,0 +1,20 @@
+{% extends "edu/base.html" %}
+{% comment %}
+	Detalle de las evaluaciones
+{% endcomment %}
+
+{% block content %}
+<div class="container-fluid">
+	<div class="row">
+		<div class="col-md-12">
+			<article>
+				<ul>
+					{% for evaluacion in evaluacion_list %}
+						<li><a href="{{evaluacion.get_absolute_url}}">{{evaluacion}}</a></li>
+					{% endfor %}
+				</ul>
+			</article>
+		</div>
+	</div>
+</div>
+{% endblock content %}

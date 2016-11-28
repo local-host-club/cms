@@ -1,0 +1,18 @@
+{% extends "lh_auth/base.html" %}
+{% comment %}
+	Página para cerrar sesión
+{% endcomment %}
+
+{% block content %}
+<div class="container-fluid">
+	<div class="row">
+		<div class="col-md-12">
+		<form method="post" action="{{action}}">
+			{% csrf_token %}
+			{{form.as_p}}
+			<input type="submit" value="Cerrar sesión">
+		</form>
+		</div>
+	</div>
+</div>
+{% endblock content %}

@@ -1,0 +1,43 @@
+{% extends "edu/base.html" %}
+{% comment %}
+	Detalle de las evaluaciones
+{% endcomment %}
+
+{% block content %}
+<div class="container-fluid">
+	<div class="row">
+		<div class="col-md-12">
+			<article>
+				<h3 class="blog-title">{{evaluacion}}</h3>
+				<div class="post-content">
+					<h4>Estrategia</h4>
+					<p>{{evaluacion.estrategia}}</p>
+					<h4>Indicadores de logro</h4>
+					<ul>
+						{% for indicador in evaluacion.indicador.all %}
+						<h5>{{indicador}}</h5>
+						<h6>Respuestas</h6>
+						<div class="table-responsive">
+							<table class="table table-bordered table-condensed">
+								<thead>
+									<tr>
+										{% for nota in indicador.nota.all %}
+										<td>{{nota.descripcion}}</td>
+										{% endfor %}
+									</tr>
+								</thead>
+							</table>
+						</div>
+						{% endfor %}
+					</ul>
+					<h4>Creada por</h4>
+					<p>{{evaluacion.creada_por.first_name}} {{evaluacion.creada_por.last_name}}</p>
+					<blockquote>
+						<footer class="pull-right">{{evaluacion.fecha_creacion}}</footer>
+					</blockquote>
+				</div>
+			</article>
+		</div>
+	</div>
+</div>
+{% endblock content %}

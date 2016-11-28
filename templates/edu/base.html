@@ -1,0 +1,92 @@
+{% extends "base/base.html" %}
+{% load menu %}
+
+{% block base_content %}
+
+<div class="col-md-3">
+	<div class="sidebar">
+		{% block sidebar %}
+		{% endblock sidebar %}
+		<div class="entry-widget">
+			<ul class="nav nav-tabs nav-justified">
+				<li>
+					<a data-toggle="tab" href="#tab1">Edu...</a>
+				</li>
+				<li>
+					<a data-toggle="tab" href="#tab2">Recent</a>
+				</li>
+			</ul>
+			<div class="tab-content">
+				<div class="tab-pane fadeInDown" id="tab1">
+					<div class="accordion">
+						<div class="panel-group" id="accordion-nav-edu">
+							<div class="panel panel-default">
+								<h4 class="panel-title">
+									<a data-parent="#accordion-nav-edu" data-toggle="collapse" href="#panel-evaluacion" class="" aria-expanded="true">
+										<i class="ico-keyboard_arrow_right"></i> Evaluaciones
+									</a>
+								</h4>
+								<div class="panel-collapse collapse" id="panel-evaluacion" aria-expanded="true">
+									<div class="panel-body">
+										<ul class="cat-menu-list">
+											<li>
+												<a href="{% url "evaluacion_list" %}">
+													<i class="ico-keyboard_arrow_right"></i> Lista de evaluaciones
+												</a>
+											</li>
+											<li>
+												<a href="{% url "evaluacion_add" %}">
+													<i class="ico-keyboard_arrow_right"></i> Crear una evaluación
+												</a>
+											</li>
+										</ul>
+									</div>
+								</div>
+							</div>
+							<div class="panel panel-default">
+								<h4 class="panel-title">
+									<a data-parent="#accordion-nav-edu" data-toggle="collapse" href="#panel-alumno" class="collapsed" aria-expanded="false">
+										<i class="ico-keyboard_arrow_right"></i>Alumnos
+									</a>
+								</h4>
+								<div class="panel-collapse collapse" id="panel-alumno" aria-expanded="false">
+									<div class="panel-body">
+										<ul class="cat-menu-list">
+											<li>
+												<a href="#"><i class="ico-keyboard_arrow_right">
+												</i> Listado de alumnos</a>
+											</li>
+										</ul>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="tab-pane fadeInDown" id="tab2">
+					<ul class="posts-list">
+						<li>
+							<div class="widget-thumb">
+								<a href="#"><img alt="" src="img/post/post1.jpg"></a>
+							</div>
+							<div class="widget-content">
+								<a href="#">asdasdas</a>
+								<div class="meta">
+									<span><i class="ico-calendar-alt-fill"></i>October 7,2015</span>
+									<span><i class="ico-tag"></i>Technology
+									</span>
+								</div>
+							</div>
+							<div class="clearfix"></div>
+						</li>
+					</ul>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<div class="col-md-9">
+	{% block content %}
+	{% endblock content %}
+</div>
+{% endblock base_content %}

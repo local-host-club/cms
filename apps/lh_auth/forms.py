@@ -3,6 +3,10 @@ from django import forms
 from apps.lh_auth.models import *
 
 
+class CustomLogoutForm(forms.Form):
+    perfil = forms.CharField(required=False, widget=forms.HiddenInput())
+
+
 class CustomSignupForm(SignupForm):
     GENERO_CHOICES = (
         ('M', 'Masculino'),

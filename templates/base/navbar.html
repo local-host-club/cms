@@ -1,0 +1,43 @@
+{% load menu %}
+
+{% block navbar %}
+<nav class="navbar navbar-default navbar-intimate navbar-fixed-top" role="navigation" data-spy="affix">
+	<div class="container">
+		<div class="navbar-header">
+			<a class="navbar-brand" href="index.html">
+				localhost <i class="ico-3dglasses"></i>
+			</a>
+			<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+				<span class="sr-only">Cambiar navegación</span>
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+			</button>
+		</div>
+		<div class="navbar-collapse collapse" id="bs-example-navbar-collapse-1">
+			<ul class="nav navbar-nav navbar-right">
+				{% generate_menu %}
+				{% for key, menu in menus.items %}
+				{% for item in menu %}
+				{% if item.visible %}
+				{% if item.separator %}
+				<li class="header">....</li>
+				{% endif %}
+				<li class="{% if item.selected %}active{% endif %} {% if item.children %}dropdown dropdown-toggle{% endif %}">
+					<a href="{{ item.url }}">
+						{% autoescape on %}
+						{{item.title}}
+						{% endautoescape %}
+					</a>
+					{% if item.children %}
+					{% include 'base/navbar-sub.html' with items=item.children %}
+					{% endif %}
+				</li>
+				{% endif %}
+				{% endfor %}
+				{% endfor %}
+			</ul>
+		</div>
+	</div>
+</nav>
+{% endblock navbar %}

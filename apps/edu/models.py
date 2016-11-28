@@ -1,4 +1,5 @@
 from django.db import models
+from django.urls import reverse_lazy
 from django.contrib.auth.models import User
 
 
@@ -22,6 +23,9 @@ class CompetenciaArea(models.Model):
 
     def __str__(self):
         return self.nombre
+
+    def get_absolute_url(self):
+        return reverse_lazy('competencia_area_detail', kwargs={'pk': self.id})
 
 
 class Competencia(models.Model):
@@ -89,7 +93,7 @@ class Nota(models.Model):
         cuenta = Nota.objects.filter(indicador=self.indicador).count()
         return 1 / cuenta * self.numero
 
-    def get_nota_indicador(self):
+    def get_nota_nivel(self):
         return self.get_nota() * self.indicador.get_porcentaje()
 
     def get_nota_total(self):
@@ -100,7 +104,7 @@ class Evaluacion(models.Model):
     nombre = models.CharField(max_length=140)
     estrategia = models.TextField()
     fecha_creacion = models.DateTimeField(auto_now_add=True)
-    creador_por = models.ForeignKey(User)
+    creada_por = models.ForeignKey(User)
 
     indicador = models.ManyToManyField(Indicador, blank=True, through='EvaluacionIndicador')
 
@@ -111,6 +115,9 @@ class Evaluacion(models.Model):
     def __str__(self):
         return self.nombre
 
+    def get_absolute_url(self):
+        return reverse_lazy('evaluacion_detail', args=[str(self.id)])
+
 
 class EvaluacionIndicador(models.Model):
     evaluacion = models.ForeignKey(Evaluacion, related_name='indicadores')
@@ -119,9 +126,6 @@ class EvaluacionIndicador(models.Model):
     class Meta:
         verbose_name = "Indicador por evaluación"
         verbose_name_plural = "Indicadores por evaluación"
-
-    def __str__(self):
-        pass
 
 
 class EvaluacionAlumno(models.Model):

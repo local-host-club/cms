@@ -1,0 +1,20 @@
+{% extends "edu/base.html" %}
+{% comment %}
+	Página para listar las áreas de competencia
+{% endcomment %}
+
+{% block content %}
+<div class="container-fluid">
+	<div class="row">
+		<div class="col-md-12">
+			<article>
+				<div class="blog-content">
+					{% for area in competenciaarea_list %}
+					<a href="{{area.get_absolute_url}}">{{area}}</a>
+					{% endfor %}
+				</div>			
+			</article>
+		</div>
+	</div>
+</div>
+{% endblock content %}

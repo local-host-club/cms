@@ -51,6 +51,14 @@ class EvaluacionForm(forms.ModelForm):
             'estrategia': forms.Textarea(attrs={'class': 'form-control'}),
             'indicador': forms.CheckboxSelectMultiple()}
 
+    def save(self, commit=True):
+        instance = super(EvaluacionForm, self).save(commit=False)
+        instance.save()
+        EvaluacionIndicador.objects.filter(evaluacion=instance).delete()
+        for ind in self.cleaned_data['indicador']:
+            ev_indicador = EvaluacionIndicador(evaluacion=instance, indicador=ind)
+            ev_indicador.save()
+
 
 NotaFormSet = modelformset_factory(Nota, extra=1, fields=['descripcion'])
 NotaFormSet2 = formset_factory(NotaForm, extra=8)

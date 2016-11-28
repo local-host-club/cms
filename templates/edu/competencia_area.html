@@ -1,4 +1,7 @@
-{% extends "base/base.html" %}
+{% extends "edu/base.html" %}
+{% comment %}
+	Detalle de área de compentecias
+{% endcomment %}
 
 {% block page_title %}
 Área de competencia
@@ -48,8 +51,8 @@
 							<blockquote class="capton">
 								<p>{{ indicador.descripcion }}</p>
 								<footer>
-									({{ indicador.get_porcentaje|floatformat:2 }} del nivel) /
-									({{ indicador.get_porcentaje_total|floatformat:2 }} del total)
+									({{ indicador.get_porcentaje|floatformat:3 }} del nivel) /
+									({{ indicador.get_porcentaje_total|floatformat:3 }} del total)
 								</footer>
 							</blockquote>
 							<div class="table-responsive">
@@ -65,9 +68,9 @@
 									{% for nota in indicador.nota.all %}
 									<tr>
 										<td>{{nota.descripcion}}</td>
-										<td>{{nota.get_nota|floatformat:2}}</td>
-										<td>{{nota.get_nota_indicador|floatformat:2}}</td>
-										<td>{{nota.get_nota_total|floatformat:2}}</td>
+										<td>{{nota.get_nota|floatformat:3}}</td>
+										<td>{{nota.get_nota_indicador|floatformat:3}}</td>
+										<td>{{nota.get_nota_total|floatformat:3}}</td>
 									</tr>
 									{% endfor %}
 								</table>

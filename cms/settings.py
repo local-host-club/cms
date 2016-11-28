@@ -50,6 +50,7 @@ INSTALLED_APPS = [
     'allauth.socialaccount',
     'allauth.socialaccount.providers.google',
 
+    'apps.main',
     'apps.lh_auth',
     'apps.blog',
     'apps.edu',
@@ -129,6 +130,8 @@ AUTHENTICATION_BACKENDS = (
 SOCIALACCOUNT_AUTO_SIGNUP = False
 
 ACCOUNT_EMAIL_VERIFICATION = "none"
+
+MENU_SELECT_PARENTS = True
 
 LOGIN_URL = '/auth/login/'
 

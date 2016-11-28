@@ -1,0 +1,15 @@
+{% load menu %}
+<ul class="dropdown-menu">
+	{% generate_menu %}
+	{% for item in items %}
+		{% if item.visible %}
+			<li class="{% if item.selected %}active{% endif %}">
+				<a href="{{ item.url }}">
+				{% autoescape on %}
+				{{item.title}}
+				{% endautoescape %}
+				</a>
+			</li>
+		{% endif %}
+	{% endfor %}
+</ul>

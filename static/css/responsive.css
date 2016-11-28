@@ -39,9 +39,7 @@
     height: auto;
     padding: 7px 15px;
   }
-  .navbar-toggle {
-    display: none;
-  }
+  
   .navbar-header {
     position: relative;
   }
